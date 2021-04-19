@@ -17,7 +17,7 @@ Type: Urban<input type="radio" name="type" value= "URBAN" />
 <input type="submit" value="save" />
 </pre>
 </form>
-${msg}
+${successMsg}<br>
 <a href="displayLocation">View All</a>
 
 </body>
