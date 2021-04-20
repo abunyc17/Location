@@ -6,11 +6,13 @@ import javax.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.stereotype.Component;
 
 /**
  * @author Abu
  */
 
+@Component
 public class EmailUtilImpl implements EmailUtil {
 	
 	@Autowired
