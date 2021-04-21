@@ -31,6 +31,7 @@
 </c:forEach>
 </table>
 
-<a href="showCreate">Add Location</a>
+<a href="showCreate">Add Location</a>  | 
+<a href="generateReport">Generate Pie-Chart</a>
 </body>
 </html>

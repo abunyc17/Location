@@ -3,6 +3,8 @@ package com.abunyc.location.controller;
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.ServletContext;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -12,21 +14,33 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.abunyc.location.entities.Location;
+import com.abunyc.location.repository.LocationRepository;
 import com.abunyc.location.service.LocationService;
 import com.abunyc.location.util.EmailUtil;
+import com.abunyc.location.util.ReportUtil;
 
 /**
  * @author Abu
  */
 
+
 @Controller
 public class LocationController {
 
 	@Autowired
+	LocationRepository locationRepository;
+	
+	@Autowired
 	LocationService locationService;
-
+	
 	@Autowired
 	EmailUtil emailUtil;
+	
+	@Autowired
+	ReportUtil reportUtil;
+	
+	@Autowired
+	ServletContext servletContext;
 
 	@RequestMapping("/showCreate")
 	public String showCreate() {
@@ -81,6 +95,16 @@ public class LocationController {
 		List<Location> aLllocation = locationService.getAllLocation();
 		modelMap.addAttribute("locations", aLllocation);
 		return "displayLocation";
+	}
+	
+	@RequestMapping("/generateReport")
+	public String generateReport() {
+		List<Object[]> data = locationRepository.findTypeAndCount();
+		String path = servletContext.getRealPath("/");
+		reportUtil.generatePieChart(path, data);
+		return "report";
+		
+		
 	}
 
 }
